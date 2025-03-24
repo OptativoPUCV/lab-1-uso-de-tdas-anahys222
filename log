@@ -2,3 +2,14 @@ do., 23 de mar. de 2025 19:57:41:
  tests:  0|5
 total_score: 0/70
 3f6cb15
+lu., 24 de mar. de 2025 20:11:20: 
+ exercises.c | 52 +++++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 49 insertions(+), 3 deletions(-)
+In file included from test.c:5:0:
+exercises.c: In function 'eliminaElementos':
+exercises.c:88:23: error: implicit declaration of function 'current' [-Werror=implicit-function-declaration]
+          ptr = (int *)current(L);
+                       ^~~~~~~
+cc1.exe: all warnings being treated as errors
+Compilation failed
+effab5e

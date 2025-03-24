@@ -33,6 +33,7 @@ void imprime_y_vacia_pila(Stack *P) {
    printf("]\n");
 }
 
+
 /* 
 Ejercicio 1.
 Crea una Lista y agrega punteros a elementos del 1 al 10.
@@ -43,6 +44,15 @@ Al finalizar retorna la lista creada.
 
 List* crea_lista() {
    List* L = create_list();
+   if (!L) return NULL;
+
+   for (int i = 0; i < 10; i++) {
+      int * num = (int *)malloc(sizeof(int));
+      if (!num) return NULL;
+      
+      *num = i;
+      pushBack(L, num);
+   }
    return L;
 }
 
@@ -52,7 +62,13 @@ Crea una función que reciba una lista de enteros (int*) y
 retorne la suma de sus elementos.
 */
 int sumaLista(List *L) {
-   return 0;
+   int suma = 0;
+   int *dato = (int *) first(L);
+   while(dato != NULL){
+      suma += *dato;
+      dato = (int *)next(L);
+   }
+   return suma;
 }
 
 /*
@@ -65,7 +81,15 @@ posiciona en el elemento anterior.
 */
 
 void eliminaElementos(List*L, int elem){
-
+   int *ptr = (int *)first(L);
+   while(ptr != NULL){
+      if(*ptr == elem){
+         popCurrent(L);
+         ptr = (int *)current(L);
+      }else{
+         ptr = (int *)next(L);
+      }
+   }
 }
 
 /*
@@ -76,6 +100,15 @@ Puedes usar una pila auxiliar.
 */
 
 void copia_pila(Stack* P1, Stack* P2) {
+   Stack *pila = create_stack();
+   void *elem;
+   while((elem = pop(P1)) != NULL){
+      push(pila, elem);
+   }
+   while((elem = pop(pila)) != NULL){
+      push(P1, elem);
+      push(P2, elem);
+   }
 }
 
 /*
@@ -86,6 +119,20 @@ paraéntesis balanceados. Retorna 1 si están balanceados,
 */
 
 int parentesisBalanceados(char *cadena) {
-   return 0;
+   int cont = 0;
+   for(int i= 0; cadena[i] != '\0'; i++){
+      if(cadena[i] == '('){
+         cont++;
+      }else if(cadena[i] == ')'){
+         cont--;
+         if(cont<0){
+            return 0;
+         }
+      }
+   }
+   if(cont == 0){
+      return 1;
+   }else{
+      return 0;
+   }
 }
-
