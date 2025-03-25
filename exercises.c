@@ -45,7 +45,7 @@ List* crea_lista() {
    List* L = create_list();
    if (!L) return NULL;
 
-   for (int i = 0; i < 10; i++) {
+   for (int i = 0; i <= 10; i++) {
       int * num = (int *)malloc(sizeof(int));
       if (!num) return NULL;
       
