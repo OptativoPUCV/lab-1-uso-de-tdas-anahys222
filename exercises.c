@@ -5,7 +5,6 @@
 #include <ctype.h>
 #include "arraylist.h"
 #include "stack.h"
-
 //#include "exercises.h"
 
 //Funciones auxiliares que puedes utilizar para debuggear tus ejercicios
@@ -63,10 +62,10 @@ retorne la suma de sus elementos.
 */
 int sumaLista(List *L) {
    int suma = 0;
-   int *dato = (int *) first(L);
+   void *dato = first(L);
    while(dato != NULL){
-      suma += *dato;
-      dato = (int *)next(L);
+      suma += *(int *)dato;
+      dato = next(L);
    }
    return suma;
 }
@@ -81,14 +80,13 @@ posiciona en el elemento anterior.
 */
 
 void eliminaElementos(List*L, int elem){
-   int *ptr = (int *)first(L);
+   void *ptr = first(L);
    while(ptr != NULL){
-      if(*ptr == elem){
+      if(*(int*)ptr == elem){
          popCurrent(L);
-         ptr = (int *)current(L);
-      }else{
-         ptr = (int *)next(L);
       }
+      ptr = next(L);
+      
    }
 }
 
@@ -101,13 +99,17 @@ Puedes usar una pila auxiliar.
 
 void copia_pila(Stack* P1, Stack* P2) {
    Stack *pila = create_stack();
-   void *elem;
-   while((elem = pop(P1)) != NULL){
+   void *elem = pop(P1);
+
+   while(elem  != NULL){
       push(pila, elem);
+      elem = pop(P1);
    }
-   while((elem = pop(pila)) != NULL){
+   elem = pop(pila);
+   while(elem != NULL){
       push(P1, elem);
       push(P2, elem);
+      elem = pop(pila);
    }
 }
 
@@ -119,20 +121,23 @@ paraéntesis balanceados. Retorna 1 si están balanceados,
 */
 
 int parentesisBalanceados(char *cadena) {
-   int cont = 0;
-   for(int i= 0; cadena[i] != '\0'; i++){
-      if(cadena[i] == '('){
-         cont++;
-      }else if(cadena[i] == ')'){
-         cont--;
-         if(cont<0){
+   Stack *pila = create_stack();
+   
+   for(int i= 0; i< strlen(cadena); i++){
+      if(cadena[i] == '(' || cadena[i] == '{'||cadena[i] == '['){
+         push(pila, &cadena[i]);
+      }else if(cadena[i] == ')' || cadena[i] == '}'||cadena[i] == ']'){
+         if(cadena[i] == ')' && *(char*)pop(pila) != '('){
+            return 0;
+         }
+         if(cadena[i] == '}' && *(char*)pop(pila) != '('){
+            return 0;
+         }
+         if(cadena[i] == ']' && *(char*)pop(pila) != '('){
             return 0;
          }
       }
    }
-   if(cont == 0){
-      return 1;
-   }else{
-      return 0;
-   }
+   if(pop(pila) == NULL) return 1;
+   return 0;
 }

@@ -13,3 +13,9 @@ exercises.c:88:23: error: implicit declaration of function 'current' [-Werror=im
 cc1.exe: all warnings being treated as errors
 Compilation failed
 effab5e
+ma., 25 de mar. de 2025 13:37:59: 
+ exercises.c | 50 ++++++++++++++++++++++++++++----------------------
+ 1 file changed, 28 insertions(+), 22 deletions(-)
+ tests:  5|2
+total_score: 50/70
+c069dcc
