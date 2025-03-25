@@ -19,3 +19,9 @@ ma., 25 de mar. de 2025 13:37:59:
  tests:  5|2
 total_score: 50/70
 c069dcc
+ma., 25 de mar. de 2025 13:41:15: 
+ exercises.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+ tests:  8|1
+total_score: 60/70
+d198321
